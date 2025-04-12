@@ -39,7 +39,7 @@ addBtn.addEventListener("click", () => {
 
     createTaskElement(taskText, false);
     tasks.push({
-        text: taskText, 
+        text: taskText,
         completed: false
     });
     updateLocalStorage();
@@ -74,7 +74,7 @@ function updateLocalStorage() {
 function updateTaskStatus(taskText) {
     tasks = tasks.map(task =>
         task.text === taskText ? {
-            ...task, 
+            ...task,
             completed: !task.completed
         } : task
     );
@@ -83,3 +83,28 @@ function updateTaskStatus(taskText) {
 function deleteTask(taskText) {
     tasks = tasks.filter(task => task.text !== taskText);
 }
+
+const clearBtn = document.getElementById("clearBtn");
+const toggleThemeBtn = document.getElementById("toggleThemeBtn");
+
+clearBtn.addEventListener("click", () => {
+    localStorage.removeItem("tasks");
+    tasks = [];
+    taskList.innerHTML = "";
+});
+
+toggleThemeBtn.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+    const isDark = document.body.classList.contains("dark");
+    toggleThemeBtn.textContent = isDark ? "Light Mode" : "Dark Mode";
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+});
+
+// Apply saved theme
+window.addEventListener("load", () => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+        document.body.classList.add("dark");
+        toggleThemeBtn.textContent = "Light Mode";
+    }
+});
