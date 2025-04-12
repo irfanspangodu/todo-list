@@ -135,7 +135,6 @@ body.dark .actions button {
         flex-direction: column;
     }
 
-    .input-group input,
     .input-group button,
     .actions button {
         width: 100%;
