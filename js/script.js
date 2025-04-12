@@ -81,6 +81,18 @@ document.addEventListener("DOMContentLoaded", () => {
         const draggedItem = document.querySelector(".dragging");
         if (draggedItem) {
             draggedItem.classList.remove("dragging");
+            const target = e.target.closest("li");
+            if (target) {
+                const draggedIndex = Array.from(taskList.children).indexOf(draggedItem);
+                const targetIndex = Array.from(taskList.children).indexOf(target);
+                if (draggedIndex < targetIndex) {
+                    tasks.splice(targetIndex + 1, 0, tasks.splice(draggedIndex, 1)[0]);
+                } else {
+                    tasks.splice(targetIndex, 0, tasks.splice(draggedIndex, 1)[0]);
+                }
+                renderTasks();
+                localStorage.setItem("tasks", JSON.stringify(tasks));
+            }
         }
     });
 
