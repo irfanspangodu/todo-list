@@ -175,3 +175,29 @@ function updateTasksFromDOM() {
         due: li.dataset.due || "" // keep due date if added
     }));
 }
+
+const prioritySelect = document.getElementById("prioritySelect");
+
+addBtn.addEventListener("click", () => {
+    const taskText = taskInput.value.trim();
+    const priority = prioritySelect.value;
+    if (taskText === "") return;
+
+    createTaskElement(taskText, false, priority);
+    tasks.push({ text: taskText, completed: false, priority });
+    updateLocalStorage();
+    taskInput.value = "";
+    addSound.play();
+});
+
+function createTaskElement(text, completed, priority = "Medium", due = "") {
+    const li = document.createElement("li");
+    li.textContent = text;
+    li.dataset.priority = priority;
+    li.dataset.due = due;
+    if (completed) li.classList.add("completed");
+    li.setAttribute("draggable", true);
+
+    taskList.appendChild(li);
+}
+
