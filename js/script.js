@@ -46,7 +46,11 @@ addBtn.addEventListener("click", () => {
     taskInput.value = "";
 });
 
-function createTaskElement(text, completed) {
+
+const dueDateInput = document.getElementById("dueDateInput");
+const due = dueDateInput.value;
+
+function createTaskElement(text, completed, taskText, priority, due) {
     const li = document.createElement("li");
     li.textContent = text;
     if (completed) li.classList.add("completed");
@@ -65,6 +69,23 @@ function createTaskElement(text, completed) {
     });
 
     taskList.appendChild(li);
+
+    tasks.push({
+        text: taskText,
+        completed: false,
+        priority,
+        due
+    });
+    dueDateInput.value = "";
+
+    if (due) {
+        const dueSpan = document.createElement("span");
+        dueSpan.style.fontSize = "12px";
+        dueSpan.style.marginLeft = "10px";
+        dueSpan.style.color = "#666";
+        dueSpan.textContent = `📅 ${due}`;
+        li.appendChild(dueSpan);
+    }
 }
 
 function updateLocalStorage() {
