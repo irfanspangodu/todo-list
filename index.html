@@ -7,15 +7,21 @@
         <link rel="stylesheet" href="css/style.css" />
     </head>
     <body>
-        <div class="container">
-            <h1>To-Do List</h1>
-            <div class="input-group">
-                <input type="text" id="taskInput" placeholder="Add a new task..." />
-                <button id="addBtn">Add</button>
-            </div>
-            <ul id="taskList"></ul>
+        <div class="actions">
+            <button id="clearBtn">Clear All</button>
+            <button id="toggleThemeBtn">Dark Mode</button>
         </div>
         
+        <section id="main">
+            <div class="container">
+                <h1>To-Do List</h1>
+                <div class="input-group">
+                    <input type="text" id="taskInput" placeholder="Add a new task..." />
+                    <button id="addBtn">Add</button>
+                </div>
+                <ul id="taskList"></ul>
+            </div>
+        </section>    
         <script src="js/script.js"></script>
     </body>
 </html>
