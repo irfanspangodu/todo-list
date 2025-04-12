@@ -8,12 +8,15 @@
 
 body {
     background: #f4f4f4;
+    width: 100%;
+}
+
+#main {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
-    width: 100%;
     min-height: 100vh;
+    height: 100%;
 }
 
 .container {
@@ -22,7 +25,7 @@ body {
     border-radius: 10px;
     width: 100%;
     max-width: 350px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0 , 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .container h1 {
@@ -43,7 +46,7 @@ input[type="text"] {
     border-radius: 5px;
 }
 
-button {
+.container button {
     padding: 10px 15px;
     background-color: #3498db;
     color: #fff;
@@ -52,7 +55,7 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+.container button:hover {
     background-color: #2980b9;
 }
 
@@ -73,4 +76,50 @@ li {
 li.completed {
     text-decoration: line-through;
     color: #808080;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.actions button {
+    flex: 1;
+    margin: 0 5px;
+    padding: 10px;
+    background-color: #2ecc71;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.actions button:hover {
+    background-color: #27ae60;
+}
+
+/* Dark mode styles */
+body.dark {
+    background-color: #1e1e1e;
+    color: #fff;
+}
+
+body.dark .container {
+    background-color: #2c2c2c;
+}
+
+
+body.dark input,
+body.dark li {
+    background-color: #444;
+    color: #fff;
+}
+
+body.dark button {
+    background-color: #34495e;
+}
+
+body.dark .actions button {
+    background-color: #16a085;
 }
