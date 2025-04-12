@@ -108,3 +108,32 @@ window.addEventListener("load", () => {
         toggleThemeBtn.textContent = "Light Mode";
     }
 });
+
+const addSound = document.getElementById("addSound");
+const deleteSound = document.getElementById("deleteSound");
+
+// Play sound on adding a task
+addBtn.addEventListener("click", () => {
+    const taskText = taskInput.value.trim();
+    if (taskText === "") return;
+
+    createTaskElement(taskText, false);
+    tasks.push({
+        text: taskText,
+        completed: false
+    });
+    updateLocalStorage();
+    taskInput.value = "";
+
+    addSound.play(); // Play sound
+});
+
+// Play sound on deleting a task
+li.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+    li.remove();
+    deleteTask(text);
+    updateLocalStorage();
+
+    deleteSound.play(); // Play sound
+});
