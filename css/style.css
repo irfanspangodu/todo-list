@@ -148,3 +148,15 @@ body.dark .actions button {
         margin: 5px 0;
     }
 }
+
+li[data-priority="High"] {
+    border-left: 5px solid red;
+}
+
+li[data-priority="Medium"] {
+    border-left: 5px solid orange;
+}
+
+li[data-priority="Low"] {
+    border-left: 5px solid green;
+}
