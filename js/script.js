@@ -129,7 +129,7 @@ addBtn.addEventListener("click", () => {
 });
 
 // Play sound on deleting a task
-li.addEventListener('contextmenu', (e) => {
+li.addEventListener("contextmenu", (e) => {
     e.preventDefault();
     li.remove();
     deleteTask(text);
@@ -137,3 +137,41 @@ li.addEventListener('contextmenu', (e) => {
 
     deleteSound.play(); // Play sound
 });
+
+let draggedItem = null;
+
+taskList.addEventListener("dragstart", (e) => {
+    if (e.target.tagName === "LI") {
+        draggedItem = e.target;
+    }
+});
+
+taskList.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    const target = e.target.closest("li");
+    if (target && target !== draggedItem) {
+        const bounding = target.getBoundingClientRect();
+        const offset = bounding.y + (bounding.height / 2);
+        if (e.clientY - offset > 0) {
+            target.after(draggedItem);
+        } else {
+            target.before(draggedItem);
+        }
+    }
+});
+
+taskList.addEventListener("drop", () => {
+    updateTasksFromDOM();
+    updateLocalStorage();
+});
+
+
+function updateTasksFromDOM() {
+    const allItems = document.querySelectorAll("#taskList li");
+    tasks = Array.from(allItems).map(li => ({
+        text: li.textContent,
+        completed: li.classList.contains("completed"),
+        priority: li.dataset.priority || "Medium", // keep priority if added
+        due: li.dataset.due || "" // keep due date if added
+    }));
+}
