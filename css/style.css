@@ -35,6 +35,7 @@ body {
 
 .container .input-group {
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
     margin-bottom: 20px;
 }
@@ -81,13 +82,10 @@ li.completed {
 
 .actions {
     display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
+    gap: 10px;
 }
 
 .actions button {
-    flex: 1;
-    margin: 0 5px;
     padding: 10px;
     background-color: #2ecc71;
     color: #fff;
