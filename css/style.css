@@ -72,5 +72,5 @@ li {
 
 li.completed {
     text-decoration: line-through;
-    color: gray;
+    color: #808080;
 }
