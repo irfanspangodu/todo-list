@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("load", () => {
     const taskInput = document.getElementById("taskInput");
     const addBtn = document.getElementById("addBtn");
     const clearBtn = document.getElementById("clearBtn");
@@ -9,7 +9,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const prioritySelect = document.getElementById("prioritySelect");
     const dueDateInput = document.getElementById("dueDateInput");
 
+    if (!taskInput || !addBtn || !clearBtn || !toggleThemeBtn || !taskList || !addSound || !deleteSound || !prioritySelect || !dueDateInput) {
+        console.error("One or more elements are not found in the DOM.");
+        return;
+    }
+
     let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+    tasks = tasks.map(task => {
+        return {
+            ...task,
+            completed: false // Initialize completed property to false
+        };
+    });
 
     function addTask() {
         const taskText = taskInput.value.trim();
@@ -24,7 +36,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const task = {
             text: taskText,
             priority: priority,
-            dueDate: dueDate
+            dueDate: dueDate,
+            completed: false // Initialize completed property to false
         };
 
         tasks.push(task);
@@ -56,8 +69,24 @@ document.addEventListener("DOMContentLoaded", () => {
                 deleteSound.play();
             });
 
+            li.addEventListener("touchstart", () => {
+                task.completed = !task.completed;
+                localStorage.setItem("tasks", JSON.stringify(tasks));
+                li.classList.toggle("completed");
+            });
+
+            li.addEventListener("click", () => {
+                task.completed = !task.completed;
+                localStorage.setItem("tasks", JSON.stringify(tasks));
+                li.classList.toggle("completed");
+            });
+
             li.appendChild(deleteBtn);
             taskList.appendChild(li);
+
+            if (task.completed) {
+                li.classList.add("completed");
+            }
         });
     }
 
@@ -100,4 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("beforeunload", () => {
         localStorage.setItem("tasks", JSON.stringify(tasks));
     });
+
+    // Render tasks on page load
+    renderTasks();
 });
